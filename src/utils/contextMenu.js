@@ -120,52 +120,6 @@ const contextMenu = (
     contextMenuGroup.hide();
 
     contextMenuGeneralActions(groupEl, editStatus);
-
-    /* // Events
-    groupEl.dblclick(function () {
-      // Show Context Menu
-      contextMenuGroup.show();
-
-      const editTextCta = this.findOne(".editText");
-
-      if (editStatus === true) {
-        // Add Edit Text
-        if (editTextCta) {
-          editTextCta.click(function () {
-            const parents = this.parents(".causal-graph-component");
-            const topMostParent = parents[parents.length - 1];
-            const topMostParentId = topMostParent.attr("id");
-            setCurrentTextUpdating(topMostParentId);
-
-            const commentTextSvg = topMostParent.findOne(".comment-text-svg");
-
-            const commentText = commentTextSvg.text();
-
-            //Enable Editing
-            setEditing(true);
-
-            // Update Text Input Value
-            commentBox.value = commentText;
-          });
-        }
-      }
-
-      // Delete Elem
-      const deleteElemCta = this.findOne(".deleteItem");
-
-      const deleteAction = function () {
-        groupEl.remove();
-      };
-
-      deleteElemCta.on("click", deleteAction);
-
-      // Document Click
-      document.addEventListener("click", function (e) {
-        if (e.target !== deleteElemCta || e.target !== editTextCta) {
-          contextMenuGroup.hide();
-        }
-      });
-    }); */
   } else {
     const parents = contextMenuAvailable.parents();
     const immediateParent = parents[0];
@@ -173,53 +127,6 @@ const contextMenu = (
     const editStatus = immediateParent.data("editable");
 
     contextMenuGeneralActions(immediateParent, editStatus);
-
-    /* immediateParent.dblclick(function () {
-      const oldContextMenu = this.findOne(".context-menu");
-      oldContextMenu.show();
-
-      const editTextCta = this.findOne(".editText");
-
-      if (editStatus === true) {
-        // Add Edit Text
-        if (editTextCta) {
-          editTextCta.click(function () {
-            const parents = this.parents(".causal-graph-component");
-
-            const topMostParent = parents[parents.length - 1];
-            const topMostParentId = topMostParent.attr("id");
-            setCurrentTextUpdating(topMostParentId);
-
-            const commentTextSvg = topMostParent.findOne(".comment-text-svg");
-            const commentText = commentTextSvg.text();
-
-            //Enable Editing
-            setEditing(true);
-
-            console.log(commentBox);
-
-            // Update Text Input Value
-            commentBox.value = commentText;
-          });
-        }
-      }
-
-      // Delete Elem
-      const deleteElemCta = this.findOne(".deleteItem");
-
-      const deleteAction = function () {
-        immediateParent.remove();
-      };
-
-      deleteElemCta.on("click", deleteAction);
-
-      // Document Click
-      document.addEventListener("click", function (e) {
-        if (e.target !== deleteElemCta || e.target !== editTextCta) {
-          oldContextMenu.hide();
-        }
-      });
-    }); */
   }
 
   return;
