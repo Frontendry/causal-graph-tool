@@ -37,7 +37,7 @@ const ToolBox = () => {
   } = useCanvasContext();
 
   // Component Level States
-  const [commentBox, setCommentBox] = useState(null);
+  const [setCommentBox] = useState(null);
 
   useEffect(() => {
     // Get textInputRef
@@ -47,7 +47,7 @@ const ToolBox = () => {
     if (textInputBox) {
       setCommentBox(textInputBox);
     }
-  }, [textInputRef]);
+  }, [textInputRef, setCommentBox]);
 
   useEffect(() => {
     const canvasEl = canvasRef.current;
@@ -112,7 +112,7 @@ const ToolBox = () => {
         }
       }
     } */
-  }, [canvasRef, setSvgFn]);
+  }, [canvasRef, setSvgFn, setCurrentTextUpdating, setEditing, textInputRef]);
 
   return (
     <section id="toolBox" className="w-1/5 border-r border-gray-200 p-4">
