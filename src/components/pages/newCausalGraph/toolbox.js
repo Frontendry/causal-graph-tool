@@ -7,10 +7,13 @@
  */
 
 // React Modules
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Flatted
 import { parse } from "flatted";
+
+// Context Menu
+import contextMenu from "../../../utils/contextMenu";
 
 // SVG.js modules
 import { SVG } from "@svgdotjs/svg.js";
@@ -25,7 +28,26 @@ import CommentInputSection from "../../general-elements/tools/text";
 import NodesContainer from "../../general-elements/tools/nodes";
 
 const ToolBox = () => {
-  const { canvasRef, setSvgFn } = useCanvasContext();
+  const {
+    canvasRef,
+    setSvgFn,
+    textInputRef,
+    setCurrentTextUpdating,
+    setEditing,
+  } = useCanvasContext();
+
+  // Component Level States
+  const [commentBox, setCommentBox] = useState(null);
+
+  useEffect(() => {
+    // Get textInputRef
+    const textInputBox = textInputRef.current;
+
+    // If available update state
+    if (textInputBox) {
+      setCommentBox(textInputBox);
+    }
+  }, [textInputRef]);
 
   useEffect(() => {
     const canvasEl = canvasRef.current;
@@ -45,6 +67,17 @@ const ToolBox = () => {
           // Restore Draggability
           draw.each(function (i, children) {
             this.draggable();
+
+            if (this.data("editable")) {
+              contextMenu(
+                this,
+                textInputRef.current,
+                setCurrentTextUpdating,
+                setEditing
+              );
+            } else {
+              contextMenu(this);
+            }
           });
 
           setSvgFn(draw);
