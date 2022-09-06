@@ -79,26 +79,6 @@ const ToolBox = () => {
         }
       }
     }
-
-    // If canvasEl exits
-    /*   if (canvasEl) {
-      // If canvasEl has no SVG else use saved data
-      if (!canvasEl.querySelector("svg")) {
-        // Initialize SVG.js
-        const draw = SVG().addTo(canvasRef.current).size("100%", "100%");
-
-        // Share draw variable on setSvgFn useCanvasContext's data value
-        setSvgFn(draw);
-      } else {
-        const localStorageVal = localStorage.getItem("causalGraph");
-
-        if (localStorageVal !== null) {
-          const svgItems = parse(localStorageVal);
-
-          console.log(svgItems);
-        }
-      }
-    } */
   }, [canvasRef, setSvgFn, setCurrentTextUpdating, setEditing, textInputRef]);
 
   return (

@@ -14,59 +14,7 @@ const contextMenu = (
 
   const contextMenuAvailable = groupEl.findOne(".context-menu");
 
-  const contextMenuGeneralActions = (parentGroup, editStatus) => {
-    parentGroup.dblclick(function () {
-      // Get Context Menu and show it
-      const contextMenuCont = this.findOne(".context-menu");
-      contextMenuCont.show();
-
-      // Get EditText CTA
-      const editTextCta = this.findOne(".editText");
-
-      if (editStatus === true) {
-        // if edit Text CTA exits
-        if (editTextCta) {
-          editTextCta.click(function () {
-            // Get Parents List
-            const parents = this.parents(".causal-graph-component");
-
-            // Get Top Most Parent ID
-            const topMostParent = parents[parents.length - 1];
-            const topMostParentId = topMostParent.attr("id");
-
-            // Share current Text Component ID being edited through setCurrentTextUpdating state
-            setCurrentTextUpdating(topMostParentId);
-
-            // Get comment from text svg
-            const commentTextSvg = topMostParent.findOne(".comment-text-svg");
-            const commentText = commentTextSvg.text();
-
-            //Enable setEditing state - will be used to toggle some elements
-            setEditing(true);
-
-            // Update Text Input Value
-            commentBox.value = commentText;
-          });
-        }
-      }
-
-      // Delete Elem
-      const deleteElemCta = this.findOne(".deleteItem");
-
-      const deleteAction = function () {
-        parentGroup.remove();
-      };
-
-      deleteElemCta.on("click", deleteAction);
-
-      // Document Click
-      document.addEventListener("click", function (e) {
-        if (e.target !== deleteElemCta || e.target !== editTextCta) {
-          contextMenuCont.hide();
-        }
-      });
-    });
-  };
+  const contextMenuGeneralActions = () => {};
 
   if (contextMenuAvailable === null) {
     // Get width for the created group above
@@ -119,9 +67,7 @@ const contextMenu = (
     // Hide Context Menu by Default
     contextMenuGroup.hide();
 
-    contextMenuGeneralActions(groupEl, editStatus);
-
-    /* // Events
+    // Events
     groupEl.dblclick(function () {
       // Show Context Menu
       contextMenuGroup.show();
@@ -165,16 +111,14 @@ const contextMenu = (
           contextMenuGroup.hide();
         }
       });
-    }); */
+    });
   } else {
     const parents = contextMenuAvailable.parents();
     const immediateParent = parents[0];
 
     const editStatus = immediateParent.data("editable");
 
-    contextMenuGeneralActions(immediateParent, editStatus);
-
-    /* immediateParent.dblclick(function () {
+    immediateParent.dblclick(function () {
       const oldContextMenu = this.findOne(".context-menu");
       oldContextMenu.show();
 
@@ -219,7 +163,7 @@ const contextMenu = (
           oldContextMenu.hide();
         }
       });
-    }); */
+    });
   }
 
   return;
