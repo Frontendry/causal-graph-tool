@@ -7,7 +7,7 @@
  */
 
 // React Modules
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 // Flatted
 import { parse } from "flatted";
@@ -35,19 +35,6 @@ const ToolBox = () => {
     setCurrentTextUpdating,
     setEditing,
   } = useCanvasContext();
-
-  // Component Level States
-  const [setCommentBox] = useState(null);
-
-  useEffect(() => {
-    // Get textInputRef
-    const textInputBox = textInputRef.current;
-
-    // If available update state
-    if (textInputBox) {
-      setCommentBox(textInputBox);
-    }
-  }, [textInputRef, setCommentBox]);
 
   useEffect(() => {
     const canvasEl = canvasRef.current;
